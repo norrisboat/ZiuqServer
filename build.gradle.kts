@@ -33,6 +33,12 @@ dependencies {
     implementation("io.ktor:ktor-server-host-common-jvm:$ktor")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor")
+    implementation("io.ktor:ktor-client-core-jvm:$ktor")
+    implementation("io.ktor:ktor-client-serialization-jvm:$ktor")
+    implementation("io.ktor:ktor-client-logging-jvm:$ktor")
+    implementation("io.ktor:ktor-client-content-negotiation-jvm:$ktor")
+    implementation("io.ktor:ktor-client-cio-jvm:$ktor")
+
 
     implementation("org.postgresql:postgresql:$postgres")
     implementation("org.jetbrains.exposed:exposed-core:$exposed")

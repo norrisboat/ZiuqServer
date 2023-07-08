@@ -2,6 +2,7 @@ package com.norrisboat.utils
 
 object Routes {
     private const val VERSION = "v1"
+    const val BASE_URL = "https://the-trivia-api.com"
 
     const val AUTH = "$VERSION/auth"
     const val LOGIN = "/login"

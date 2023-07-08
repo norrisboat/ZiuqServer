@@ -1,6 +1,7 @@
 package com.norrisboat.services
 
 import com.norrisboat.data.models.quiz.Quiz
+import com.norrisboat.data.models.quiz.QuizResponse
 import com.norrisboat.data.models.quiz.toQuiz
 import com.norrisboat.data.tables.QuizTable
 import com.norrisboat.factory.DatabaseFactory.dbQuery
@@ -9,11 +10,12 @@ import com.norrisboat.utils.toUUID
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.util.*
 
 interface QuizService {
 
-    suspend fun getQuiz(id: String): Quiz?
+    suspend fun getQuiz(id: String): QuizResponse?
 
     suspend fun getQuizForUser(userId: String): List<Quiz>
 
@@ -23,8 +25,21 @@ interface QuizService {
 
 class QuizServiceImpl : QuizService, KoinComponent {
 
-    override suspend fun getQuiz(id: String): Quiz? = dbQuery {
-        return@dbQuery QuizTable.select { QuizTable.id eq id.toUUID() }.map { it.toQuiz() }.singleOrNull()
+    private val questionService: QuestionService by inject()
+
+    override suspend fun getQuiz(id: String): QuizResponse? {
+        val quiz = dbQuery {
+            QuizTable.select { QuizTable.id eq id.toUUID() }.map { it.toQuiz() }.singleOrNull()
+        }
+        quiz?.let {
+            return QuizResponse(
+                quizId = id,
+                questions = questionService.getQuizQuestions(id),
+                results = it.results,
+                createdAt = it.createdAt
+            )
+        }
+        return null
     }
 
     override suspend fun getQuizForUser(userId: String): List<Quiz> = dbQuery {

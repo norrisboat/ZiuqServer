@@ -9,8 +9,8 @@ fun String.toUUID(): UUID = UUID.fromString(this)
 
 fun Table.getUUID(column: Column<UUID>): UUID {
     val uuid = UUID.randomUUID()
-    val user = this.select { column eq uuid }.singleOrNull()
-    return if (user == null) {
+    val id = this.select { column eq uuid }.singleOrNull()
+    return if (id == null) {
         uuid
     } else {
         getUUID(column)
