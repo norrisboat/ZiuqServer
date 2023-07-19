@@ -2,12 +2,15 @@ package com.norrisboat.routes
 
 import com.norrisboat.data.models.network.ErrorResponse
 import com.norrisboat.data.models.network.Response
-import com.norrisboat.data.models.quiz.QuizRequest
-import com.norrisboat.data.models.quiz.QuizResponse
+import com.norrisboat.data.models.quiz.*
 import com.norrisboat.services.QuestionService
 import com.norrisboat.services.QuizService
 import com.norrisboat.utils.Routes.CREATE_QUIZ
+import com.norrisboat.utils.Routes.GET_CATEGORIES
+import com.norrisboat.utils.Routes.GET_DIFFICULTIES
 import com.norrisboat.utils.Routes.GET_QUIZ
+import com.norrisboat.utils.Routes.GET_SETUP
+import com.norrisboat.utils.Routes.GET_TYPES
 import com.norrisboat.utils.Routes.GET_USER_QUIZ
 import com.norrisboat.utils.Routes.QUIZ
 import io.ktor.http.*
@@ -85,6 +88,46 @@ fun Route.quizRoutes() {
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.Conflict, ErrorResponse(false, e.message ?: "Some Problem Occurred!"))
                 return@post
+            }
+        }
+
+        get(GET_CATEGORIES) {
+
+            try {
+                call.respond(HttpStatusCode.OK, Response(true, "Success", questionCategories))
+            } catch (e: Exception) {
+                call.respond(HttpStatusCode.Conflict, ErrorResponse(false, e.message ?: "Some Problem Occurred!"))
+                return@get
+            }
+        }
+
+        get(GET_DIFFICULTIES) {
+
+            try {
+                call.respond(HttpStatusCode.OK, Response(true, "Success", Difficulty.values()))
+            } catch (e: Exception) {
+                call.respond(HttpStatusCode.Conflict, ErrorResponse(false, e.message ?: "Some Problem Occurred!"))
+                return@get
+            }
+        }
+
+        get(GET_TYPES) {
+
+            try {
+                call.respond(HttpStatusCode.OK, Response(true, "Success", questionTypes))
+            } catch (e: Exception) {
+                call.respond(HttpStatusCode.Conflict, ErrorResponse(false, e.message ?: "Some Problem Occurred!"))
+                return@get
+            }
+        }
+
+        get(GET_SETUP) {
+
+            try {
+                call.respond(HttpStatusCode.OK, Response(true, "Success", defaultSetupData))
+            } catch (e: Exception) {
+                call.respond(HttpStatusCode.Conflict, ErrorResponse(false, e.message ?: "Some Problem Occurred!"))
+                return@get
             }
         }
     }

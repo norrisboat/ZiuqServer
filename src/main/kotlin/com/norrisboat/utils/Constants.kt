@@ -10,6 +10,10 @@ object Routes {
 
     const val QUIZ = "$VERSION/quiz"
     const val GET_QUIZ = "/{quizId}"
+    const val GET_CATEGORIES = "/categories"
+    const val GET_DIFFICULTIES = "/difficulties"
+    const val GET_TYPES = "/types"
+    const val GET_SETUP = "/setup"
     const val GET_USER_QUIZ = "/user/{userId}"
     const val CREATE_QUIZ = "/create/{userId}"
 
