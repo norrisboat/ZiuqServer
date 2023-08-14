@@ -9,6 +9,7 @@ import com.norrisboat.utils.getUUID
 import com.norrisboat.utils.toUUID
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.update
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.*
@@ -20,6 +21,8 @@ interface QuizService {
     suspend fun getQuizForUser(userId: String): List<Quiz>
 
     suspend fun createQuiz(user: String): String
+
+    suspend fun updateQuizResult(id: String, result: String): QuizResponse?
 
 }
 
@@ -55,6 +58,13 @@ class QuizServiceImpl : QuizService, KoinComponent {
         }
 
         return@dbQuery uuid.toString()
+    }
+
+    override suspend fun updateQuizResult(id: String, result: String): QuizResponse? = dbQuery {
+        QuizTable.update({ QuizTable.id eq id.toUUID() }) { table ->
+            table[results] = result
+        }
+        return@dbQuery getQuiz(id)
     }
 
 }

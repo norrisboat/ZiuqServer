@@ -23,9 +23,7 @@ val questionCategories = listOf(
     QuizCategory("Art And Literature", "art_and_literature"),
     QuizCategory("Sport And Leisure", "sport_and_leisure"),
     QuizCategory("General Knowledge", "general_knowledge"),
-    QuizCategory("Science", "science"),
     QuizCategory("Food And Drink", "food_and_drink"),
-    QuizCategory("Random", "random"),
 )
 
 val questionTypes = listOf(

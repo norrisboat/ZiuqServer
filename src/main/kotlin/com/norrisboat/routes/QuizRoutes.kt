@@ -13,6 +13,7 @@ import com.norrisboat.utils.Routes.GET_SETUP
 import com.norrisboat.utils.Routes.GET_TYPES
 import com.norrisboat.utils.Routes.GET_USER_QUIZ
 import com.norrisboat.utils.Routes.QUIZ
+import com.norrisboat.utils.Routes.UPDATE_QUIZ_RESULT
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -88,6 +89,34 @@ fun Route.quizRoutes() {
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.Conflict, ErrorResponse(false, e.message ?: "Some Problem Occurred!"))
                 return@post
+            }
+        }
+
+        put (UPDATE_QUIZ_RESULT) {
+
+            val quizId: String
+            val quizRequest = try {
+                quizId = call.parameters["quizId"].toString()
+                call.receive<QuizResultUpdate>()
+            } catch (e: Exception) {
+                call.respond(HttpStatusCode.BadRequest, ErrorResponse(message = "Missing Some Fields"))
+                return@put
+            }
+
+            try {
+
+                val quiz = quizService.updateQuizResult(quizId, quizRequest.result)
+                if (quiz == null) {
+                    call.respond(
+                        HttpStatusCode.BadRequest,
+                        ErrorResponse(message = "Couldn't send quiz results. Please try again later")
+                    )
+                } else {
+                    call.respond(HttpStatusCode.OK, Response(true, "Success", quiz))
+                }
+            } catch (e: Exception) {
+                call.respond(HttpStatusCode.Conflict, ErrorResponse(false, e.message ?: "Some Problem Occurred!"))
+                return@put
             }
         }
 

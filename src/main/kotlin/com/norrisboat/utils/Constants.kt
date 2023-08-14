@@ -16,5 +16,6 @@ object Routes {
     const val GET_SETUP = "/setup"
     const val GET_USER_QUIZ = "/user/{userId}"
     const val CREATE_QUIZ = "/create/{userId}"
+    const val UPDATE_QUIZ_RESULT = "/{quizId}/update"
 
 }

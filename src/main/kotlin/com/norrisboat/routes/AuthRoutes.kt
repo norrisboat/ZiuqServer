@@ -59,7 +59,7 @@ fun Route.authRoutes() {
                 if (user == null) {
                     call.respond(
                         HttpStatusCode.BadRequest,
-                        ErrorResponse(message = "Incorrect username or password or password")
+                        ErrorResponse(message = "Incorrect username or password")
                     )
                 } else {
                     call.respond(HttpStatusCode.OK, Response(true, "Login successful", user))
