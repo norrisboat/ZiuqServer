@@ -6,6 +6,7 @@ import com.norrisboat.factory.DatabaseFactory.dbQuery
 import com.norrisboat.utils.getUUID
 import com.norrisboat.utils.toUUID
 import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.lowerCase
 import org.jetbrains.exposed.sql.select
 import org.koin.core.component.KoinComponent
 
@@ -50,7 +51,8 @@ class AuthServiceImpl : AuthService, KoinComponent {
     }
 
     override fun getUserByUsername(name: String): User? {
-        return UserTable.select { UserTable.username eq name }.map { it.toUser() }.singleOrNull()
+        return UserTable.select { UserTable.username.lowerCase() eq name.lowercase() }.map { it.toUser() }
+            .singleOrNull()
     }
 
 }

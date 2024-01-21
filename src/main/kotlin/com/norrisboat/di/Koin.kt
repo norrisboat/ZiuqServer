@@ -1,6 +1,7 @@
 package com.norrisboat.di
 
 import com.norrisboat.services.*
+import com.norrisboat.utils.SocketConnection
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -13,6 +14,7 @@ val servicesModule = module {
     single<AuthService> { AuthServiceImpl() }
     single<QuizService> { QuizServiceImpl() }
     single<QuestionService> { QuestionServiceImpl() }
+    single<LiveQuizService> { LiveQuizServiceImpl() }
 
     single {
         HttpClient(CIO) {
@@ -28,4 +30,8 @@ val servicesModule = module {
             }
         }
     }
+}
+
+val socketConnectionModule = module {
+    single { SocketConnection() }
 }

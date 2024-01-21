@@ -92,7 +92,7 @@ fun Route.quizRoutes() {
             }
         }
 
-        put (UPDATE_QUIZ_RESULT) {
+        put(UPDATE_QUIZ_RESULT) {
 
             val quizId: String
             val quizRequest = try {

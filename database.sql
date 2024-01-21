@@ -1,14 +1,14 @@
 CREATE TABLE public."user" (
-	id uuid NOT null,
+	id uuid NOT NULL,
 	username varchar NOT NULL,
 	"password" varchar NOT NULL,
 	created_at timestamp NOT NULL DEFAULT now(),
 	CONSTRAINT user_pk PRIMARY KEY (id),
-	CONSTRAINT user_un UNIQUE (email)
+	CONSTRAINT user_un UNIQUE (username)
 );
 
 CREATE TABLE public.quiz (
-	id uuid NOT null,
+	id uuid NOT NULL,
 	session_id varchar NOT NULL,
 	user_id uuid NOT NULL,
 	results varchar NULL,
@@ -18,7 +18,7 @@ CREATE TABLE public.quiz (
 );
 
 CREATE TABLE public.questions (
-	id uuid NOT null,
+	id uuid NOT NULL,
 	question_id varchar NOT NULL,
 	quiz_id uuid NOT NULL,
 	created_at timestamp NOT NULL DEFAULT now(),

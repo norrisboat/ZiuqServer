@@ -8,9 +8,9 @@ val koin : String by project
 val jbCrypt : String by project
 
 plugins {
-    kotlin("jvm") version "1.8.22"
+    kotlin("jvm") version "1.9.21"
     id("io.ktor.plugin") version "2.3.2"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.22"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.21"
 }
 
 group = "com.norrisboat"
@@ -38,7 +38,8 @@ dependencies {
     implementation("io.ktor:ktor-client-logging-jvm:$ktor")
     implementation("io.ktor:ktor-client-content-negotiation-jvm:$ktor")
     implementation("io.ktor:ktor-client-cio-jvm:$ktor")
-
+    implementation("io.ktor:ktor-server-sessions:$ktor")
+    implementation("io.ktor:ktor-server-websockets:$ktor")
 
     implementation("org.postgresql:postgresql:$postgres")
     implementation("org.jetbrains.exposed:exposed-core:$exposed")

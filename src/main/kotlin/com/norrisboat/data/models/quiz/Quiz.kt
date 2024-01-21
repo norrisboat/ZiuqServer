@@ -5,7 +5,13 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.ResultRow
 
 @Serializable
-data class Quiz(val id: String, val userId: String, val sessionId: String? = null, val results: String? = null, val createdAt: String? = null)
+data class Quiz(
+    val id: String,
+    val userId: String,
+    val sessionId: String? = null,
+    val results: String? = null,
+    val createdAt: String? = null
+)
 
 fun ResultRow.toQuiz(): Quiz {
     return Quiz(
