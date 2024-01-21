@@ -20,8 +20,8 @@ The database of choice is Postgres. [Koin](https://insert-koin.io/) is used for 
 1. Clone the repository.
 2. Open the project in Android Studio.
 3. Use database.sql as a guide to setup database.
-3. Replace Config variables({{port}},{{db_url}},{{username}},{{password}}).
-4. Build and run the app.
+4. Replace Config variables({{port}},{{db_url}},{{username}},{{password}}).
+5. Build and run the app.
 
 
 ## ❤️ Built with
